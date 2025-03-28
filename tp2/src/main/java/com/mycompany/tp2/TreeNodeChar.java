@@ -8,38 +8,38 @@ package com.mycompany.tp2;
  *
  * @author ilari
  */
-public class TreeNode {
-    private int valor;
-    private TreeNode izquierda;
-    private TreeNode derecha;
+public class TreeNodeChar {
+    private char valor;
+    private TreeNodeChar izquierda;
+    private TreeNodeChar derecha;
     
-    public TreeNode(int value){
+    public TreeNodeChar(char value){
         this.valor=value;
         this.izquierda=null;
         this.derecha=null;
     }
     
-    public void setIzq(TreeNode node){
+    public void setIzq(TreeNodeChar node){
         this.izquierda=node;
     }
     
-    public void setDer(TreeNode node){
+    public void setDer(TreeNodeChar node){
         this.derecha=node;
     }
     
-    public TreeNode getDer(){
+    public TreeNodeChar getDer(){
         return this.derecha;
     }
     
-    public TreeNode getIzq(){
+    public TreeNodeChar getIzq(){
         return this.izquierda;
     }
     
-    public int getValor(){
+    public char getValor(){
         return this.valor;
     }
     
-    public void setValor(int valor){
+    public void setValor(char valor){
         this.valor=valor;
     }
     

@@ -16,9 +16,27 @@ public class Tp2 {
         arbol.add(8);
         arbol.add(12);
         arbol.add(9);
-        System.out.println(arbol.getHeight());
-        System.out.println(arbol.getLongestBranch());
-        System.out.println(arbol.getListFrontera());
-        System.out.println(arbol.getMaxElem());
+        //System.out.println(arbol.getHeight());
+        //System.out.println(arbol.getLongestBranch());
+        //System.out.println(arbol.getListFrontera());
+        //System.out.println(arbol.getMaxElem());
+        //System.out.println(arbol.suma());
+        System.out.println(arbol.getHojasMayor(12));
     }
+   
+    public static void rellenarArbol(Tree t){
+        rellenarArbol(t.getRootNode());
+    }
+    
+    public static void rellenarArbol(TreeNode n){
+        if( n==null || n.esHoja())//interpreto vacio como esto
+            return;
+        rellenarArbol(n.getIzq());
+        rellenarArbol(n.getDer());
+        int valIz=n.getIzq()!=null ? n.getIzq().getValor():0;
+        int valDer=n.getDer()!=null ? n.getDer().getValor():0;
+        n.setValor(valDer-valIz);
+        
+    }
+
 }

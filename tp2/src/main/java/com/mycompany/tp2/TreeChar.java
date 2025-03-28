@@ -11,14 +11,14 @@ import java.util.List;
  *
  * @author ilari
  */
-public class Tree {
-    private TreeNode raiz;
+public class TreeChar {
+    private TreeNodeChar raiz;
     
-    public Tree(){
+    public TreeChar(){
         this.raiz=null;
     }
     
-    public TreeNode getRootNode(){
+    public TreeNodeChar getRootNode(){
         return this.raiz;
     }
     
@@ -36,11 +36,11 @@ public class Tree {
         return this.raiz==null;
     }
     
-    public void delete(int val) {
+    public void delete(char val) {
         this.raiz = deleteRec(this.raiz, val); // Actualiza la raíz por si se borra
     }
 
-    private TreeNode deleteRec(TreeNode node, int val) {
+    private TreeNodeChar deleteRec(TreeNodeChar node, char val) {
         if (node == null) {
             return null; // No se encontró el valor
         }
@@ -62,7 +62,7 @@ public class Tree {
             // Caso 2: Nodo con dos hijos
             else {
                 // Encontrar el mínimo del subárbol derecho (sucesor in-order)
-                TreeNode minNode = findMin(node.getDer());
+                TreeNodeChar minNode = findMin(node.getDer());
                 // Copiar el valor mínimo al nodo actual
                 node.setValor(minNode.getValor());
                 // Borrar el nodo mínimo del subárbol derecho
@@ -72,7 +72,7 @@ public class Tree {
         return node;
     }
 
-    private TreeNode findMin(TreeNode node) {
+    private TreeNodeChar findMin(TreeNodeChar node) {
         while (node.getIzq() != null) {
             node = node.getIzq();
         }
@@ -83,7 +83,7 @@ public class Tree {
         return this.getHeight(this.raiz);
     }
     
-    private int getHeight(TreeNode node){
+    private int getHeight(TreeNodeChar node){
         if(node==null)
             return 0;
         int alturaIzq = getHeight(node.getIzq());
@@ -103,7 +103,7 @@ public class Tree {
         this.imprimirPosOrden(raiz);
     }
     
-    private void imprimirPreOrden(TreeNode nodo)
+    private void imprimirPreOrden(TreeNodeChar nodo)
     {
         if (nodo == null)
             return;
@@ -112,7 +112,7 @@ public class Tree {
         imprimirPreOrden(nodo.getDer());
     } 
     
-    private void imprimirEnOrden(TreeNode nodo)
+    private void imprimirEnOrden(TreeNodeChar nodo)
     {
         if (nodo == null)
             return;
@@ -121,7 +121,7 @@ public class Tree {
         imprimirEnOrden(nodo.getDer());
     }
     
-    private void imprimirPosOrden(TreeNode nodo)
+    private void imprimirPosOrden(TreeNodeChar nodo)
     {
         if (nodo == null)
             return;
@@ -134,26 +134,26 @@ public class Tree {
         return getLongestBranch(raiz);
     }
     
-    private List<Integer> getLongestBranch(TreeNode nodo) {
+    private List<Character> getLongestBranch(TreeNodeChar nodo) {
         if (nodo == null) {
             return new ArrayList<>(); 
         }
-        List<Integer> ramaIzq = getLongestBranch(nodo.getIzq());
-        List<Integer> ramaDer = getLongestBranch(nodo.getDer());
+        List<Character> ramaIzq = getLongestBranch(nodo.getIzq());
+        List<Character> ramaDer = getLongestBranch(nodo.getDer());
 
-        List<Integer> ramaLarga = (ramaDer.size() > ramaIzq.size()) ? ramaDer : ramaIzq;
+        List<Character> ramaLarga = (ramaDer.size() > ramaIzq.size()) ? ramaDer : ramaIzq;
 
         ramaLarga.add(0, nodo.getValor()); 
         return ramaLarga;
     }
     
-    public List<Integer> getListFrontera() {
-        List<Integer> hojas = new ArrayList<>();
+    public List<Character> getListFrontera() {
+        List<Character> hojas = new ArrayList<>();
         getListFrontera(raiz, hojas);
         return hojas;
     }
 
-    private void getListFrontera(TreeNode nodo, List<Integer> hojas) {
+    private void getListFrontera(TreeNodeChar nodo, List<Character> hojas) {
         if (nodo == null) {
             return;
         }
@@ -170,13 +170,13 @@ public class Tree {
         return getMaxElem(raiz);
     }
     
-    public List<Integer> getElemAtLevel(int level){
-        ArrayList<Integer> result=new ArrayList();
+    public List<Character> getElemAtLevel(int level){
+        ArrayList<Character> result=new ArrayList();
         getElemAtLevel(raiz,level,result);
         return result;
     }
     
-    private void getElemAtLevel(TreeNode node,int lvl,ArrayList<Integer>result){
+    private void getElemAtLevel(TreeNodeChar node,int lvl,ArrayList<Character>result){
         if(node==null)
             return;
         lvl--;
@@ -187,13 +187,13 @@ public class Tree {
         getElemAtLevel(node.getDer(),lvl,result);
     }
     
-    private int getMaxElem(TreeNode nodo){
+    private int getMaxElem(TreeNodeChar nodo){
         if(nodo.getDer()==null)
             return nodo.getValor();
         return getMaxElem(nodo.getDer());
     }
     
-    private boolean deepSearch(TreeNode node, int val){
+    private boolean deepSearch(TreeNodeChar node, int val){
         if (node == null)  
             return false;
         if (node.getValor() == val)  
@@ -205,17 +205,17 @@ public class Tree {
             return deepSearch(node.getDer(), val);
     }
     
-    public void add(int valor) {
+    public void add(char valor) {
         if (this.raiz == null)
-            this.raiz = new TreeNode(valor);
+            this.raiz = new TreeNodeChar(valor);
         else
             this.add(this.raiz,valor);
     }
 
-    private void add(TreeNode nodo, int valor) {
+    private void add(TreeNodeChar nodo, char valor) {
         if (nodo.getValor() > valor) {
             if (nodo.getIzq() == null) {
-            TreeNode temp = new TreeNode(valor);
+            TreeNodeChar temp = new TreeNodeChar(valor);
             nodo.setIzq(temp);
             } 
             else {
@@ -224,7 +224,7 @@ public class Tree {
         } 
         else if (nodo.getValor() < valor) {
             if (nodo.getDer() == null) {
-            TreeNode temp = new TreeNode(valor);
+            TreeNodeChar temp = new TreeNodeChar(valor);
             nodo.setDer(temp);
             } else {
             add(nodo.getDer(),valor);
@@ -238,7 +238,7 @@ public class Tree {
         return suma(this.raiz);
     }
     
-    private int suma(TreeNode node){
+    private int suma(TreeNodeChar node){
         if(node==null)
             return 0;
         int suma=node.getValor();
@@ -247,23 +247,40 @@ public class Tree {
         return suma;
     }
     
-    public List<Integer> getHojasMayor(int k){
-        ArrayList<Integer> result=new ArrayList();
-        getHojasMayor(this.raiz,result,k);
+    public ArrayList<ArrayList<Character>> buscaPalabras(int vocales) {
+        ArrayList<ArrayList<Character>> result = new ArrayList<>();
+        buscaPalabras(this.raiz, result, new ArrayList<>(), vocales);
         return result;
     }
-    
-    private void getHojasMayor(TreeNode node,List<Integer> result, int k){
-        if(node==null)
+
+    private void buscaPalabras(TreeNodeChar node, ArrayList<ArrayList<Character>> result, 
+                             ArrayList<Character> actual, int vocalesRestantes) {
+        if (node == null) {
             return;
-        if(node.getDer()==null && node.getIzq()==null){
-            if(node.getValor()>k)
-                result.add(node.getValor());
         }
-        else{
-            getHojasMayor(node.getIzq(),result,k);
-            getHojasMayor(node.getDer(),result,k);
+        actual.add(node.getValor());
+
+        boolean esVocal = isVocal(node.getValor());
+        if (esVocal) {
+            vocalesRestantes--;
         }
+
+        if (node.esHoja()) {
+            if (vocalesRestantes == 0) {
+                result.add(new ArrayList<>(actual));
+            }
+        } else {
+            buscaPalabras(node.getIzq(), result, actual, vocalesRestantes);
+            buscaPalabras(node.getDer(), result, actual, vocalesRestantes);
+        }
+        actual.remove(actual.size() - 1);
     }
+
+// Método auxiliar para verificar vocales
+    private boolean isVocal(char c) {
+        return "aeiouAEIOU".indexOf(c) != -1;
+    }
+        
+
 }
 
